@@ -1,4 +1,4 @@
-version: v2.3.1
+version: v2.1.6
 plugins:
   - module: "github.com/tty2/noinliner"
-    version: v0.0.2
+    path: .

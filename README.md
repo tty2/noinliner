@@ -75,6 +75,14 @@ Run:
 
     golangci-lint custom -v
 
+Better way:
+
+    make build
+
+If you want to replace golangci-lint with the one with this linter, call:
+
+    make replace
+
 the result binary can be called instead of golangci-lint or you can change this binary to golangci-lint. It is in your `$(go env GOPATH)/bin`
 
 License
