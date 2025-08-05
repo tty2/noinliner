@@ -1,4 +1,6 @@
 # noinliner
+---
+**noinliner** is a custom Go linter plugin for golangci-lint that disallows inline variable declarations in `if` statements.
 
 ⚠️ Disclaimer
 
@@ -9,21 +11,6 @@
   This is not part of the official Go style guide, and many Go developers (and tools like go fmt, golint, or staticcheck) accept or even encourage inline declarations in if statements.
 
   Use this tool if it aligns with your team's style philosophy — or ignore it if it doesn’t.
-
-
-**noinliner** is a custom Go linter that disallows inline variable declarations in `if` statements.
-
-It flags patterns like:
-
-```go
-if val, err := doSomething(); err != nil {
-    // ❌ flagged by noinliner
-}
-
-if _, ok := myMap[key]; ok {
-    // ❌ flagged by noinliner
-}
-```
 
 🚫 Why Avoid Inline Declarations in if?
 
@@ -49,6 +36,20 @@ if configString := c.String("apns_config"); configString != "" {
 }
 ```
 
+## Behavior
+
+❌ It flags patterns like:
+
+```go
+if val, err := doSomething(); err != nil {
+    // ❌ flagged by noinliner
+}
+
+if _, ok := myMap[key]; ok {
+    // ❌ flagged by noinliner
+}
+```
+
 
 ✅ Allowed Patterns
 
@@ -64,27 +65,17 @@ if ok {
 }
 ```
 
-🔍 What It Checks
-
-- Flags any if statement with an inline Init declaration.
-
-- Does not check switch statements (by design).
-
-- Ignores the variable names or types — any inline init is flagged.
-
 🛠 Installation
 
-    go install github.com/tty2/noinliner@latest
+It uses golangci-lint [Module Plugin System](https://golangci-lint.run/plugins/module-plugins/)
 
-🚀 Usage
+Inside `.custom-gcl.yaml` you can change the version (it's better to have the same golangci-lint has on the machine).
 
-Run noinliner on a package or directory:
+Run:
 
-    noinliner ./...
+    golangci-lint custom -v
 
-Or target a specific file:
-
-    noinliner myfile.go
+the result binary can be called instead of golangci-lint or you can change this binary to golangci-lint. It is in your `$(go env GOPATH)/bin`
 
 License
 
