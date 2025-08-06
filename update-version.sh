@@ -1,6 +1,8 @@
 #!/bin/bash
 
-version=$(golangci-lint version | grep -oP 'version \Kv[0-9]+\.[0-9]+\.[0-9]+')
+raw_version=$(golangci-lint version | grep -oP 'version\s+\K(v?[0-9]+\.[0-9]+\.[0-9]+)')
+version="v${raw_version#v}"
+echo $version
 
 yaml_file=".custom-gcl.yaml"
 
